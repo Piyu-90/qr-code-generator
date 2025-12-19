@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code Generator</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Video background */
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Content box */
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      background: rgba(0, 0, 0, 0.45);
+      color: white;
+      padding: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 260px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #qrcode {
+      margin-top: 20px;
+      background: white;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background video -->
+  <video autoplay muted loop>
+    <source src="bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Main content -->
+  <div class="container">
+    <h1>QR Code Generator</h1>
+
+    <input type="text" id="text" placeholder="Enter text or URL">
+    <button onclick="generateQR()">Generate QR</button>
+
+    <div id="qrcode"></div>
+  </div>
+
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+  <script>
+    function generateQR() {
+      const qrBox = document.getElementById("qrcode");
+      qrBox.innerHTML = "";
+
+      const text = document.getElementById("text").value;
+
+      if (text === "") {
+        alert("Please enter text or URL");
+        return;
+      }
+
+      new QRCode(qrBox, {
+        text: text,
+        width: 200,
+        height: 200
+      });
+    }
+  </script>
+
+</body>
+</html>
+
+
